@@ -11,8 +11,6 @@ from tkinter import *
 from tkinter import filedialog
 from PIL import ImageTk, Image, ImageDraw, ImageFont
 
-DARKGRAY = "#A9A9A9"
-DIMGRAY = "#696969"
 MIDNIGHTBLUE = "#191970"
 
 FONT1 = ImageFont.truetype('Oxygen-Bold.ttf', 10)
@@ -94,7 +92,7 @@ def clear_watermark():
    display_img = ImageTk.PhotoImage(resized_img)
    canvas.create_image(0, 20, anchor=NW, image=display_img)
 
-def load_watermark_image():
+def open_watermark_image():
     global img
     global resized_img
     global display_img
@@ -126,42 +124,51 @@ def load_watermark_image():
 
 window = Tk()
 window.title("WaterMark.me")
-window.config(padx=50, pady=50, bg=DARKGRAY)
+window.minsize(width=600, height=550)
+window.config(bg='white')
 
-canvas = Canvas(window, width=300, height=200,
-                bg=DARKGRAY, highlightthickness=0)
-canvas.grid(column=0, columnspan=3, row=5)
+frame = Frame(window, bg='#d3e0fa', bd=0.03)
+frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
 
-title_label = Label(text="WaterMark. me", font=(
-    FONT2, 30, "bold"), fg=MIDNIGHTBLUE, bg=DARKGRAY)
-title_label.grid(column=0, row=0, columnspan=3,
-                 pady=20, sticky=tk.N+tk.S+tk.W+tk.E)
 
-open_image_button = Button(text="Open Image", font=(
+title_label = Label(frame, text="WaterMark. me", font=(
+    FONT2, 30, "bold"), fg=MIDNIGHTBLUE, bg='white')
+title_label.place(relx=0, rely=0.04, relwidth=0.8, relheight=0.1)
+
+open_image_button = Button(frame, text="Open Image", font=(
     FONT2, 10, "bold"), command=open_img, highlightthickness=0)
-open_image_button.grid(column=0, row=1, pady=20)
+open_image_button.place(relx=0.1, rely=0.2, relwidth=0.2, relheight=0.07)   
 
-apply_watermark_button = Button(text="Apply Watermark Text", font=(
-    FONT2, 10, "bold"), command=apply_watermark, highlightthickness=0)
-apply_watermark_button.grid(column=1, row=1)
+open_watermark_image = Button(frame, text="Open Watermark Image", font=(
+    FONT2, 10, "bold"), command=open_watermark_image, highlightthickness=0)
+open_watermark_image.place(relx=0.32, rely=0.2, relwidth=0.35, relheight=0.07)
 
-clear_watermark_button = Button(text="Clear Watermark", font=(
-    FONT2, 10, "bold"), command=clear_watermark, highlightthickness=0)
-clear_watermark_button.grid(column=2, row=1, sticky=tk.W)
-
-load_watermark_image = Button(text="Load Watermark Image", font=(
-    FONT2, 10, "bold"), command=load_watermark_image, highlightthickness=0)
-load_watermark_image.grid(column=1, row=4)
-
-watermark_text_label = Label(text="Watermark text:", bg=DARKGRAY)
-watermark_text_label.grid(column=0, row=3)
-
-watermark_text = Entry(width=35)
-watermark_text.focus()
-watermark_text.grid(column=1, row=3, sticky=tk.E)
-
-save_image_button = Button(text="Save Image", font=(
+save_image_button = Button(frame, text="Save Image", font=(
     FONT2, 10, "bold"), command=save_img, highlightthickness=0)
-save_image_button.grid(column=2, row=3, sticky=tk.W, padx=10)
+save_image_button.place(relx=0.69, rely=0.2, relwidth=0.2, relheight=0.07)
+
+watermark_text_label = Label(frame, text="Watermark text:")
+watermark_text_label.place(relx=0.1, rely=0.3, relwidth=0.2, relheight=0.07)
+
+watermark_text = Entry(frame, width=35)
+watermark_text.focus()
+watermark_text.place(relx=0.32, rely=0.3, relwidth=0.57, relheight=0.07)
+
+apply_watermark_button = Button(frame, text="Apply Watermark Text", font=(
+    FONT2, 10, "bold"), command=apply_watermark, highlightthickness=0)
+apply_watermark_button.place(relx=0.1, rely=0.4, relwidth=0.4, relheight=0.07)
+
+clear_watermark_button = Button(frame, text="Clear Watermark", font=(
+    FONT2, 10, "bold"), command=clear_watermark, highlightthickness=0)
+clear_watermark_button.place(relx=0.52, rely=0.4, relwidth=0.37, relheight=0.07)
+
+
+canvas = Canvas(frame, width=300, height=200,
+                bg='#d3e0fa', highlightthickness=0)
+canvas.place(relx=0.2, rely=0.5)
+
+quit_button = Button(frame, text='Exit', font=(
+    FONT2, 10, "bold"), command=window.destroy)
+quit_button.place(relx=0.85, rely=0.9, relwidth=0.1, relheight=0.05)
 
 window.mainloop()
