@@ -5,8 +5,6 @@
 
 #Note: There was no emphasis here on the program interface design, but just on the functionality
 
-
-import tkinter as tk
 from tkinter import *
 from tkinter import filedialog
 from PIL import ImageTk, Image, ImageDraw, ImageFont
