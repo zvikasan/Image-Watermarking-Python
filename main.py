@@ -35,6 +35,8 @@ def open_img():
     resized_img = img.resize((basewidth, hsize), Image.ANTIALIAS)
     # ----- End of resizing image ------------------
     display_img = ImageTk.PhotoImage(resized_img)
+    print(resized_img.size[0])
+    print(resized_img.size[1])
     canvas.create_image(0, 20, anchor=NW, image=display_img)
 
 
@@ -122,7 +124,7 @@ def open_watermark_image():
 
 window = Tk()
 window.title("WaterMark.me")
-window.minsize(width=600, height=550)
+window.minsize(width=600, height=850)
 window.config(bg='white')
 
 frame = Frame(window, bg='#d3e0fa', bd=0.03)
@@ -161,7 +163,7 @@ clear_watermark_button = Button(frame, text="Clear Watermark", font=(
 clear_watermark_button.place(relx=0.52, rely=0.4, relwidth=0.37, relheight=0.07)
 
 
-canvas = Canvas(frame, width=300, height=200,
+canvas = Canvas(frame, width=300, height=400,
                 bg='#d3e0fa', highlightthickness=0)
 canvas.place(relx=0.2, rely=0.5)
 
